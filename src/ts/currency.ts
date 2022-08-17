@@ -1,6 +1,12 @@
 export interface CurrencyDto {
-    ccy: string;
-    base_ccy: string;
-    buy: string;
-    sale: string;
+    r030: string;
+    txt: string;
+    rate: number;
+    cc: string;
+    exchangedate: string;
+}
+
+export interface CurrencyOnChangeParams {
+    inputVal?: string | number;
+    selectVal?: string
 }
