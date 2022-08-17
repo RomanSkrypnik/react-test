@@ -1,42 +1,43 @@
-import React, {ChangeEvent, FC, useState} from 'react';
-import {Form} from 'react-bootstrap';
-import {CurrencyOnChangeParams} from "../ts";
+import React, {ChangeEvent, FC, useEffect, useState} from 'react';
+import {Form} from "react-bootstrap";
 
 interface Props {
-    onChange?: (data: CurrencyOnChangeParams) => {};
-    items: { value: string | number, text: string }[];
+    inputValue: number;
+    selectValue: number;
+    onInputChange: (val: number) => void;
+    onSelectChange: (val: number) => void;
+    items: { value: number, text: string }[];
 }
 
-export const CurrencyInput: FC<Props> = ({onChange, items}) => {
-    const [inputVal, setInputVal] = useState<string>();
-    const [selectVal, setSelectVal] = useState<string | number>();
+export const CurrencyInput: FC<Props> = ({selectValue, inputValue, onSelectChange, onInputChange, items}) => {
+    const [inputVal, setInputVal] = useState(inputValue);
+    const [selectVal, setSelectVal] = useState<number>(selectValue);
 
+    useEffect(() => {
+        setInputVal(inputValue);
+    }, [inputValue]);
 
-    const handleChange = () => {
-        onChange({inputVal, selectVal});
+    const handleInputChange = ({target}: ChangeEvent<HTMLInputElement>) => {
+        const {value} = target;
+        setInputVal(+value);
+        onInputChange(+value);
     };
 
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const {value} = e.target;
-        setInputVal(value);
-
-    };
-
-    const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        const {value} = e.target;
-        setSelectVal(value);
-
+    const handleSelectChange = ({target}: ChangeEvent<HTMLSelectElement>) => {
+        const {value} = target;
+        setSelectVal(+value);
+        onSelectChange(+value);
     };
 
     return (
         <div className='d-flex'>
             <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Control type="text" value={inputVal} onChange={handleInputChange}/>
+                <Form.Control type="text" onChange={handleInputChange} value={inputVal}/>
             </Form.Group>
-            <Form.Select onChange={handleSelectChange} aria-label="Default select example">
+            <Form.Select value={selectVal} onChange={handleSelectChange} aria-label="Default select example">
                 {
-                    items.map(({value, text}) => (
-                        <option value={value}>{text}</option>
+                    items.map(({value, text}, idx) => (
+                        <option value={value} key={idx}>{text}</option>
                     ))
                 }
             </Form.Select>

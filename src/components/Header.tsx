@@ -1,10 +1,9 @@
 import React from 'react';
-import {useFetchCurrencies} from "../hooks";
+import {useFetchHeaderCurrencies} from "../hooks";
 import {Container, ListGroup, Nav, Navbar} from "react-bootstrap";
 
 export const Header = () => {
-
-    const {isLoading, data} = useFetchCurrencies();
+    const {data} = useFetchHeaderCurrencies();
 
     return (
         <Navbar bg="dark" variant="dark">
@@ -13,8 +12,8 @@ export const Header = () => {
                 <Nav>
                     <ListGroup horizontal>
                         {
-                            data?.data.map(({cc}, idx) =>
-                                <ListGroup.Item key={idx}>{cc} | Buy {buy} | Sale {sale}</ListGroup.Item>
+                            data?.map(({cc, rate}, idx) =>
+                                <ListGroup.Item key={idx}>{cc} | {rate}</ListGroup.Item>
                             )
                         }
                     </ListGroup>

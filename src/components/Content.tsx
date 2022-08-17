@@ -1,11 +1,18 @@
 import React from 'react';
-import {CurrencyInput} from "./CurrencyInput";
+import {CurrencyConverter} from "./CurrencyConverter";
+import {useFetchCurrencies} from "../hooks";
 
 export const Content = () => {
+    const {data} = useFetchCurrencies();
 
     return (
-        <div className='d-flex'>
-            <CurrencyInput items={[{value: 1, text: 'test'}]}/>
+        <div>
+            {
+                data &&
+                <>
+                    <CurrencyConverter items={data}/>
+                </>
+            }
         </div>
     );
 };
