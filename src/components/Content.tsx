@@ -4,7 +4,7 @@ import {useFetchCurrencies} from "../hooks";
 import {Container, Spinner} from "react-bootstrap";
 
 export const Content = () => {
-    const {isLoading, data} = useFetchCurrencies();
+    const {isLoading, data: currencies} = useFetchCurrencies();
 
     return (
         <main className='p-4 vh-100 bg-secondary'>
@@ -13,10 +13,10 @@ export const Content = () => {
                     isLoading && <Spinner animation="border"/>
                 }
                 {
-                    data &&
+                    currencies &&
                     <>
                         <h1 className='text-white'>Currency converter</h1>
-                        <CurrencyConverter items={data}/>
+                        <CurrencyConverter items={currencies}/>
                     </>
                 }
             </Container>

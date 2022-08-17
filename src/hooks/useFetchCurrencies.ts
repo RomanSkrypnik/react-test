@@ -6,7 +6,7 @@ const fetchCurrencies = async () => {
 };
 
 export const useFetchHeaderCurrencies = () => {
-    return useQuery(['header-currencies'], fetchCurrencies, {
+    return useQuery(['currencies'], fetchCurrencies, {
         select: ({data}) => data.filter(({cc}) => cc === 'USD' || cc === 'EUR').map(({cc, rate}) => ({
             cc,
             rate: rate.toFixed(2)

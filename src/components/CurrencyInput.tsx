@@ -1,5 +1,6 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {Form} from "react-bootstrap";
+import InputMask from 'react-input-mask'
 
 interface Props {
     inputValue: string;
@@ -14,7 +15,8 @@ export const CurrencyInput: FC<Props> = ({selectValue, inputValue, onSelectChang
     const [selectVal, setSelectVal] = useState<number>(selectValue);
 
     useEffect(() => {
-        setInputVal(inputValue);
+        const val = +inputValue;
+        setInputVal(val.toFixed(2));
     }, [inputValue]);
 
     const handleInputChange = ({target}: ChangeEvent<HTMLInputElement>) => {
@@ -32,9 +34,12 @@ export const CurrencyInput: FC<Props> = ({selectValue, inputValue, onSelectChang
     return (
         <div className='d-flex mt-3'>
             <Form.Group controlId="formBasicPassword">
-                <Form.Control type="text" onChange={handleInputChange} value={inputVal}/>
+                <InputMask mask='[0-9]' value={inputVal} onChange={handleInputChange}>
+                    {(props: any) => <Form.Control {...props} type="text" />}
+                </InputMask>
             </Form.Group>
-            <Form.Select value={selectVal} onChange={handleSelectChange} className='ms-3 w-auto' aria-label="Default select example">
+            <Form.Select value={selectVal} onChange={handleSelectChange} className='ms-3 w-auto'
+                         aria-label="Default select example">
                 {
                     items.map(({value, text}, idx) => (
                         <option value={value} key={idx}>{text}</option>
