@@ -13,14 +13,16 @@ export const CurrencyConverter: FC<Props> = ({items}) => {
     const [relation, setRelation] = useState<number>();
 
     useEffect(() => {
-        setRelation(firstSelect / secondSelect);
-    }, [firstSelect, secondSelect]);
+        const relation = firstSelect / secondSelect;
+        setRelation(relation);
+        setSecondVal(firstVal * relation);
+    }, [firstSelect]);
 
     useEffect(() => {
-        if (relation) {
-            setFirstVal(firstVal * relation);
-        }
-    }, [relation]);
+        const relation = firstSelect / secondSelect;
+        setRelation(relation);
+        setFirstVal(secondVal * relation);
+    }, [secondSelect]);
 
     const handleFirstInputChange = (val: number) => {
         setFirstVal(val);
