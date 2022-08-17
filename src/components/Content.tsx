@@ -1,19 +1,25 @@
 import React from 'react';
 import {CurrencyConverter} from "./CurrencyConverter";
 import {useFetchCurrencies} from "../hooks";
-import {Container} from "react-bootstrap";
+import {Container, Spinner} from "react-bootstrap";
 
 export const Content = () => {
-    const {data} = useFetchCurrencies();
+    const {isLoading, data} = useFetchCurrencies();
 
     return (
-        <Container>
-            {
-                data &&
-                <>
-                    <CurrencyConverter items={data}/>
-                </>
-            }
-        </Container>
+        <main className='p-4 vh-100 bg-secondary'>
+            <Container className='d-flex flex-column align-items-center'>
+                {
+                    isLoading && <Spinner animation="border"/>
+                }
+                {
+                    data &&
+                    <>
+                        <h1 className='text-white'>Currency converter</h1>
+                        <CurrencyConverter items={data}/>
+                    </>
+                }
+            </Container>
+        </main>
     );
 };

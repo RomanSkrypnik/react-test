@@ -30,11 +30,11 @@ export const CurrencyInput: FC<Props> = ({selectValue, inputValue, onSelectChang
     };
 
     return (
-        <div className='d-flex'>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
+        <div className='d-flex mt-3'>
+            <Form.Group controlId="formBasicPassword">
                 <Form.Control type="text" onChange={handleInputChange} value={inputVal}/>
             </Form.Group>
-            <Form.Select value={selectVal} onChange={handleSelectChange} aria-label="Default select example">
+            <Form.Select value={selectVal} onChange={handleSelectChange} className='ms-3 w-auto' aria-label="Default select example">
                 {
                     items.map(({value, text}, idx) => (
                         <option value={value} key={idx}>{text}</option>

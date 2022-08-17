@@ -8,7 +8,7 @@ export const Header = () => {
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="#home">Currencies</Navbar.Brand>
+                <Navbar.Brand>Currencies</Navbar.Brand>
                 <Nav>
                     <ListGroup horizontal>
                         {
