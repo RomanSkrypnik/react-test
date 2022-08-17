@@ -13,37 +13,29 @@ export const CurrencyConverter: FC<Props> = ({items}) => {
     const [relation, setRelation] = useState<number>();
 
     useEffect(() => {
-        const relation = firstSelect / secondSelect;
-        setRelation(relation);
+        const relation = calculateRelation();
         setSecondVal(firstVal * relation);
     }, [firstSelect]);
 
     useEffect(() => {
-        const relation = firstSelect / secondSelect;
-        setRelation(relation);
+        const relation = calculateRelation();
         setFirstVal(secondVal * relation);
     }, [secondSelect]);
 
+    const calculateRelation = () => {
+        const relation = firstSelect / secondSelect;
+        setRelation(relation);
+        return relation;
+    };
+
     const handleFirstInputChange = (val: number) => {
         setFirstVal(val);
-        if (relation) {
-            setSecondVal(val * relation);
-        }
+        relation && setSecondVal(val * relation);
     };
 
     const handleSecondInputChange = (val: number) => {
         setSecondVal(val);
-        if (relation) {
-            setFirstVal(val / relation);
-        }
-    };
-
-    const handleFirstSelectChange = (val: number) => {
-        setFirstSelect(val);
-    };
-
-    const handleSecondSelectChange = (val: number) => {
-        setSecondSelect(val);
+        relation && setFirstVal(val / relation);
     };
 
     return (
@@ -53,14 +45,14 @@ export const CurrencyConverter: FC<Props> = ({items}) => {
                 selectValue={firstSelect}
                 items={items}
                 onInputChange={handleFirstInputChange}
-                onSelectChange={handleFirstSelectChange}
+                onSelectChange={(val: number) => setFirstSelect(val)}
             />
             <CurrencyInput
                 inputValue={`${secondVal}`}
                 selectValue={secondSelect}
                 items={items}
                 onInputChange={handleSecondInputChange}
-                onSelectChange={handleSecondSelectChange}
+                onSelectChange={(val: number) => setSecondSelect(val)}
             />
         </>
     );
