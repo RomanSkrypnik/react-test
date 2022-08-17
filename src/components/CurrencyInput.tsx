@@ -2,7 +2,7 @@ import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {Form} from "react-bootstrap";
 
 interface Props {
-    inputValue: number;
+    inputValue: string;
     selectValue: number;
     onInputChange: (val: number) => void;
     onSelectChange: (val: number) => void;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const CurrencyInput: FC<Props> = ({selectValue, inputValue, onSelectChange, onInputChange, items}) => {
-    const [inputVal, setInputVal] = useState(inputValue);
+    const [inputVal, setInputVal] = useState<string>(inputValue);
     const [selectVal, setSelectVal] = useState<number>(selectValue);
 
     useEffect(() => {
@@ -19,7 +19,7 @@ export const CurrencyInput: FC<Props> = ({selectValue, inputValue, onSelectChang
 
     const handleInputChange = ({target}: ChangeEvent<HTMLInputElement>) => {
         const {value} = target;
-        setInputVal(+value);
+        setInputVal(value);
         onInputChange(+value);
     };
 

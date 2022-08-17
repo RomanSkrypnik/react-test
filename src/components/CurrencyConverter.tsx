@@ -32,7 +32,7 @@ export const CurrencyConverter: FC<Props> = ({items}) => {
     const handleSecondInputChange = (val: number) => {
         setSecondVal(val);
         if (relation) {
-            setFirstVal(secondVal / relation);
+            setFirstVal(val / relation);
         }
     };
 
@@ -47,14 +47,14 @@ export const CurrencyConverter: FC<Props> = ({items}) => {
     return (
         <>
             <CurrencyInput
-                inputValue={firstVal}
+                inputValue={`${firstVal}`}
                 selectValue={firstSelect}
                 items={items}
                 onInputChange={handleFirstInputChange}
                 onSelectChange={handleFirstSelectChange}
             />
             <CurrencyInput
-                inputValue={secondVal}
+                inputValue={`${secondVal}`}
                 selectValue={secondSelect}
                 items={items}
                 onInputChange={handleSecondInputChange}
