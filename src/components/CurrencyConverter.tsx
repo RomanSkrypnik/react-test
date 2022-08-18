@@ -19,7 +19,7 @@ export const CurrencyConverter: FC<Props> = ({items}) => {
 
     useEffect(() => {
         const relation = calculateRelation();
-        setFirstVal(secondVal * relation);
+        setFirstVal(secondVal / relation);
     }, [secondSelect]);
 
     const calculateRelation = () => {
