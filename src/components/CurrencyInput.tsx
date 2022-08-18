@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, FC, useEffect, useState} from 'react';
+import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {Form} from "react-bootstrap";
 
 interface Props {

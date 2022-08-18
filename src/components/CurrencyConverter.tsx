@@ -10,36 +10,37 @@ export const CurrencyConverter: FC<Props> = ({items}) => {
     const [secondVal, setSecondVal] = useState(0);
     const [firstSelect, setFirstSelect] = useState(items[0].value);
     const [secondSelect, setSecondSelect] = useState(items[1].value);
-    const [relation, setRelation] = useState<number>();
+    const [relation, setRelation] = useState(0);
 
     useEffect(() => {
         const relation = calculateRelation();
-        setSecondVal(firstVal * relation);
+        setSecondVal(+(firstVal * relation).toFixed(4));
     }, [firstSelect]);
 
     useEffect(() => {
         const relation = calculateRelation();
-        setFirstVal(secondVal / relation);
+        setFirstVal(+(secondVal / relation).toFixed(4));
     }, [secondSelect]);
 
     const calculateRelation = () => {
-        const relation = firstSelect / secondSelect;
+        const relation = +(firstSelect / secondSelect).toFixed(4);
         setRelation(relation);
         return relation;
     };
 
     const handleFirstInputChange = (val: number) => {
         setFirstVal(val);
-        relation && setSecondVal(val * relation);
+        relation && setSecondVal(+(val * relation).toFixed(4));
     };
 
     const handleSecondInputChange = (val: number) => {
         setSecondVal(val);
-        relation && setFirstVal(val / relation);
+        relation && setFirstVal(+(val / relation).toFixed(4));
     };
 
     return (
         <>
+            <h2>{relation}</h2>
             <CurrencyInput
                 inputValue={`${firstVal}`}
                 selectValue={firstSelect}
