@@ -6,7 +6,9 @@ export interface CurrencyDto {
     exchangedate: string;
 }
 
-export interface CurrencyOnChangeParams {
-    inputVal?: string | number;
-    selectVal?: string
+export interface CurrencyItemDto {
+    value: number;
+    text: string;
 }
+
+

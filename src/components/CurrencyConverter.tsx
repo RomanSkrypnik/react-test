@@ -1,15 +1,16 @@
 import React, {FC, useEffect, useState} from 'react';
 import {CurrencyInput} from "./CurrencyInput";
+import {CurrencyItemDto} from "../ts";
 
 interface Props {
-    items: { value: number, text: string }[];
+    items: CurrencyItemDto[];
 }
 
 export const CurrencyConverter: FC<Props> = ({items}) => {
     const [firstVal, setFirstVal] = useState(0);
     const [secondVal, setSecondVal] = useState(0);
-    const [firstSelect, setFirstSelect] = useState(items[0].value);
-    const [secondSelect, setSecondSelect] = useState(items[1].value);
+    const [firstSelect, setFirstSelect] = useState<number>(items[0].value);
+    const [secondSelect, setSecondSelect] = useState<number>(items[1].value);
     const [relation, setRelation] = useState(0);
 
     useEffect(() => {
@@ -40,7 +41,6 @@ export const CurrencyConverter: FC<Props> = ({items}) => {
 
     return (
         <>
-            <h2>{relation}</h2>
             <CurrencyInput
                 inputValue={`${firstVal}`}
                 selectValue={firstSelect}
